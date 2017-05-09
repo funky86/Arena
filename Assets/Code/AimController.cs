@@ -2,7 +2,13 @@
 
 public class AimController : MonoBehaviour {
 
-    const float MaxRotationDegrees = 10f;
+    [Header("Parameters")]
+    [SerializeField] float Sensitivity = 1f;
+    [SerializeField] float MaxRotationDegrees = 1f;
+
+    [Header("Components")]
+    [SerializeField] Transform CameraPlaceholderTransform;
+    [SerializeField] Transform CameraTransform;
 
     Quaternion InitialRotation;
 
@@ -11,12 +17,13 @@ public class AimController : MonoBehaviour {
     }
 	
 	void Update () {
-        Vector2 mousePosition = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+        float rotationX = Input.GetAxisRaw("Mouse X");
+        float rotationY = Input.GetAxisRaw("Mouse Y");
 
-        float degreesHorizontal = mousePosition.x;
-        float degreesVertical = -1 * (mousePosition.y);
+        rotationX *= Sensitivity;
+        rotationY *= Sensitivity;
 
-        //Camera.main.transform.Rotate(Camera.main.transform.up, degreesHorizontal);
-        Camera.main.transform.localRotation = Quaternion.AngleAxis(degreesVertical, Camera.main.transform.right);
+        CameraPlaceholderTransform.Rotate(0, rotationX, 0);
+        CameraTransform.Rotate(-rotationY, 0, 0);
 	}
 }
