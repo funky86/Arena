@@ -12,11 +12,11 @@ public class AimController : MonoBehaviour {
 
     Quaternion InitialRotation;
 
-	void Start () {
+	void Awake() {
         InitialRotation = transform.localRotation;
     }
 	
-	void Update () {
+	void Update() {
         float rotationX = Input.GetAxisRaw("Mouse X");
         float rotationY = Input.GetAxisRaw("Mouse Y");
 

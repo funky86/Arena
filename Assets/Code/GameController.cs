@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
 
-public class GameController : MonoBehaviour
-{
+public class GameController : MonoBehaviour {
 }

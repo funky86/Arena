@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public class CarController : MonoBehaviour
-{
+public class CarController : MonoBehaviour {
+
     [Header("Wheel objects transforms")]
     [SerializeField] Transform m_WheelFLTransform;
     [SerializeField] Transform m_WheelFRTransform;
@@ -24,8 +24,7 @@ public class CarController : MonoBehaviour
 
     float SteerAngle = 0f;
 
-    void Update()
-    {
+    void Update() {
         m_WheelFLTransform.localRotation = Quaternion.Euler(0, SteerAngle, 0);
         m_WheelFRTransform.localRotation = Quaternion.Euler(0, SteerAngle, 0);
 
@@ -35,8 +34,7 @@ public class CarController : MonoBehaviour
         ApplyWheelPosition(m_WheelBRCollider, m_WheelBRTransform);
     }
 
-    void FixedUpdate()
-	{
+    void FixedUpdate() {
 		float accelerate = Input.GetAxis(m_InputAxisVertial);
         float motorTorque = accelerate * m_MaxMotorTorque;
 
@@ -45,13 +43,11 @@ public class CarController : MonoBehaviour
         m_WheelBLCollider.motorTorque = motorTorque;
         m_WheelBRCollider.motorTorque = motorTorque;
 
-        if (Input.GetKey(KeyCode.Space))
-        {
+        if (Input.GetKey(KeyCode.Space)) {
             m_WheelBLCollider.brakeTorque = m_BreakTorque;
             m_WheelBRCollider.brakeTorque = m_BreakTorque;
         }
-        else
-        {
+        else {
             m_WheelBLCollider.brakeTorque = 0.0f;
             m_WheelBRCollider.brakeTorque = 0.0f;
         }
@@ -63,8 +59,7 @@ public class CarController : MonoBehaviour
 		m_WheelFRCollider.steerAngle = SteerAngle;
     }
 
-    void ApplyWheelPosition(WheelCollider sourceWheelCollider, Transform targetTransform)
-    {
+    void ApplyWheelPosition(WheelCollider sourceWheelCollider, Transform targetTransform) {
         Vector3 position;
         Quaternion rotation;
         sourceWheelCollider.GetWorldPose(out position, out rotation);
